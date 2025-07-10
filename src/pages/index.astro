@@ -1,9 +1,11 @@
 ---
-// SYSTEM BOOT... DATA LOADING...
+// 1940년대 신문 컨셉 데이터
 const candidateName = "정연우";
-const slogan = "> 학생이 중심이 되는 학교, 여러분과 함께 만들겠습니다._";
-const pageTitle = `//ERROR: UNSTABLE_CONNECTION | 기호 1번 ${candidateName}`;
-const footerSlogan = "확실한 회장, 확실히 정연우";
+const newspaperTitle = "경성 학생 일보";
+const issueDate = "1945년 10월 24일"; // 예시 날짜입니다.
+const pageTitle = `${newspaperTitle} | ${candidateName} 후보 특별 호외`;
+const mainHeadline = `학생의 시대, 새로운 장을 열다`;
+const footerText = `시대의 선택, 기호 1번 정연우`;
 ---
 
 <!DOCTYPE html>
@@ -13,201 +15,174 @@ const footerSlogan = "확실한 회장, 확실히 정연우";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{pageTitle}</title>
     <style is:global>
-        /* Google Fonts: 터미널 폰트(VT323)와 미래적인 폰트(Orbitron) */
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=VT323&display=swap');
+        /* Google Fonts: 클래식한 명조체 (Gowun Batang, Nanum Myeongjo) */
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 
-        /* === 사이버펑크 글리치 스타일 === */
-        :root {
-            --bg-color: #000000;
-            --scanline-color: rgba(0, 255, 0, 0.1);
-            --primary-glow: #ff00ff; /* 마젠타 */
-            --secondary-glow: #00ffff; /* 시안 */
-            --text-color: #00ff00; /* 라임 그린 */
-        }
-        
-        @keyframes textGlitch { /* 텍스트 깨짐 애니메이션 */
-            0%, 100% { clip-path: inset(0 0 0 0); }
-            5% { clip-path: inset(0.8em 0 0.2em 0); }
-            10% { clip-path: inset(0.2em 0 0.8em 0); }
-            15% { clip-path: inset(0.5em 0 0.1em 0); }
-            20% { clip-path: inset(0.1em 0 0.5em 0); }
-            /* ... 중간 생략 ... */
-            80% { clip-path: inset(0.3em 0 0.4em 0); }
-            85% { transform: translate(5px, 2px); }
-            90% { transform: translate(-5px, -2px); }
-            95% { clip-path: inset(0.6em 0 0.1em 0); }
-        }
-
-        @keyframes scanlines { /* 화면 스캔라인 효과 */
-            from { background-position: 0 0; }
-            to { background-position: 0 100%; }
-        }
-
+        /* === 1940년대 신문 스타일 === */
         body {
-            font-family: 'VT323', monospace;
-            margin: 0; padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            font-size: 18px;
-            text-shadow: 0 0 5px var(--text-color), 0 0 10px var(--text-color);
-            overflow-x: hidden;
-        }
-        /* 스캔라인 오버레이 */
-        body::after {
-            content: ' '; display: block; position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(to bottom, transparent 50%, var(--scanline-color) 51%);
-            background-size: 100% 4px;
-            animation: scanlines 0.2s linear infinite;
-            pointer-events: none; /* 클릭 방해 안 함 */
-            z-index: 100;
-        }
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-
-        /* === 글리치 헤더 === */
-        .hero-header { padding: 80px 20px; text-align: center; margin-bottom: 60px; position: relative; }
-        .hero-header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 6rem;
+            font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
             margin: 0;
-            font-weight: 900;
-            position: relative;
-            animation: textGlitch 2s infinite;
+            padding: 0;
+            background-color: #fdf5e6; /* 낡은 종이 색 (Seashell White) */
+            color: #2c2c2c; /* 짙은 잉크 색 */
+            line-height: 1.8;
+            font-size: 16px;
         }
-        /* 글리치 효과 레이어 */
-        .hero-header h1::before, .hero-header h1::after {
-            content: attr(data-text); /* h1의 텍스트를 그대로 복사 */
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-color);
-            overflow: hidden;
+
+        .newspaper-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #f9f4e8;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid #dcd3c3;
         }
-        .hero-header h1::before {
-            color: var(--primary-glow);
-            text-shadow: 0 0 5px var(--primary-glow);
-            transform: translate(-3px, -3px);
-            animation: textGlitch 2.5s infinite reverse;
+
+        /* === 신문 상단 (제호, 날짜) === */
+        .masthead {
+            text-align: center;
+            border-bottom: 5px double #2c2c2c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
-        .hero-header h1::after {
-            color: var(--secondary-glow);
-            text-shadow: 0 0 5px var(--secondary-glow);
-            transform: translate(3px, 3px);
-            animation: textGlitch 1.5s infinite;
+        .masthead h1 {
+            font-family: 'Nanum Myeongjo', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 5px;
+        }
+        .masthead-sub {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            margin-top: 10px;
+            padding: 0 10px;
+            font-weight: 700;
+        }
+
+        /* === 1면 톱기사 헤드라인 === */
+        .main-headline {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .main-headline h2 {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 0;
+        }
+        .main-headline p {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin: 5px 0 0;
+        }
+
+        /* === 2단 컬럼 레이아웃 === */
+        .content-area {
+            column-count: 2;
+            column-gap: 40px;
+            column-rule: 1px solid #dcd3c3;
         }
         
-        @keyframes blink { 50% { opacity: 0; } }
-        .hero-header .slogan { font-size: 1.5em; margin-top: 20px; animation: blink 1s step-end infinite; }
-
-        /* === 글리치 공약 카드 === */
-        .policy-card {
-            background: rgba(0, 20, 0, 0.5);
-            border: 2px solid var(--text-color);
-            border-radius: 0;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: inset 0 0 15px var(--text-color);
-            opacity: 0; /* 초기 상태: 투명 */
-            transition: opacity 0.2s, box-shadow 0.2s;
-        }
-        @keyframes flickerIn {
-            0% { opacity: 0; }
-            20% { opacity: 1; border-color: var(--primary-glow); }
-            40% { opacity: 0.3; }
-            60% { opacity: 1; border-color: var(--secondary-glow); }
-            80% { opacity: 0.5; }
-            100% { opacity: 1; border-color: var(--text-color); }
-        }
-        .policy-card.is-visible {
-            animation: flickerIn 0.5s forwards;
-        }
-        .policy-card:hover {
-            box-shadow: 0 0 25px var(--primary-glow), inset 0 0 25px var(--primary-glow);
-            border-color: var(--primary-glow);
+        /* 컬럼이 깨지지 않게 방지 */
+        @media (max-width: 768px) {
+            .content-area {
+                column-count: 1;
+            }
         }
 
-        /* === 카드 내부 스타일 === */
-        .section-title {
-            display: flex; align-items: center;
-            font-family: 'Orbitron', sans-serif; font-size: 2em;
-            color: var(--secondary-glow); text-shadow: 0 0 5px var(--secondary-glow);
-            border-bottom: 2px dashed var(--text-color);
-            padding-bottom: 15px; margin-top: 0; margin-bottom: 25px;
+        /* === 개별 기사(공약) 스타일 === */
+        .article {
+            margin-bottom: 30px;
+            break-inside: avoid-column; /* 기사가 컬럼 중간에 잘리는 현상 방지 */
+            padding: 15px;
+            border: 1px solid #e7e0d2;
+            background: #fffef9;
         }
-        .section-title svg {
-            width: 28px; height: 28px; margin-right: 15px; fill: var(--secondary-glow);
+        
+        .article-title {
+            font-family: 'Nanum Myeongjo', serif;
+            font-weight: 800;
+            font-size: 1.8em;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 15px;
         }
-        h3 { font-family: 'Orbitron', sans-serif; font-size: 1.5em; color: var(--primary-glow); }
-        h4 { font-size: 1.2em; color: var(--text-color); margin-top: 20px; margin-bottom: 10px; }
-        ul, ol { padding-left: 20px; list-style-type: '>> '; }
-        li { margin-bottom: 10px; }
-        .note { font-size: 1em; color: #888; margin-top: 15px; }
 
-        /* === 터미널 푸터 === */
-        footer { text-align: center; padding: 40px 20px; margin-top: 40px; }
-        footer p {
-            font-size: 1.5em; color: var(--secondary-glow);
+        h3 { font-size: 1.3em; font-weight: 700; color: #000; }
+        h4 { font-size: 1.1em; font-weight: 700; color: #333; margin-top: 20px; margin-bottom: 10px; }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .note { font-size: 0.9em; color: #666; margin-top: 15px; font-style: italic; }
+
+        /* === 신문 하단 === */
+        footer {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 2px solid #2c2c2c;
+            font-size: 1.2em;
+            font-weight: 700;
         }
-        footer p::before { content: 'SYSTEM_MSG :: '; }
-        footer p::after { content: ' :: SHUTTING_DOWN...'; }
     </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero-header">
-      <h1 data-text={candidateName}>{candidateName}</h1>
-      <p class="slogan">{slogan}</p>
+  <div class="newspaper-container">
+    <header class="masthead">
+      <h1>{newspaperTitle}</h1>
+      <div class="masthead-sub">
+        <span>기호 1번 {candidateName} 후보 특별 호외</span>
+        <span>{issueDate}</span>
+      </div>
     </header>
 
-    <main>
-        <!-- EXECUTE POLICY_PROTOCOL_01 -->
-        <div class="policy-card">
-            <h2 class="section-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>생활 관리 규정</h2>
+    <div class="main-headline">
+      <h2>{mainHeadline}</h2>
+      <p>후보 {candidateName}, 주요 공약 전격 발표</p>
+    </div>
+
+    <main class="content-area">
+        <!-- 1. 생활 관리 규정 기사 -->
+        <div class="article">
+            <h2 class="article-title">생활 관리 규정, 학생의 손으로</h2>
             <h3>벌점재심청구권 부여</h3>
-            <h4>[도입 취지]</h4><p>기존 상벌점 제도에서 학생이 받은 벌점에 대해 정당하게 대응할 수 있는 수단이 부족. 이에 학생에게 '벌점재심청구권'을 부여하여, 자신이 받은 벌점에 대해 재고를 요청할 수 있는 공식적인 권리를 보장.</p>
-            <h4>[예상 효과]</h4><p>교사의 일방적 지시가 아닌, 학생과의 상호 작용과 보완을 통해 벌점제를 운영. 학교 민주주의 발전에 기여하는 중요 정책이 될 것.</p>
+            <h4>도입 취지</h4><p>기존 상벌점 제도에서 학생이 받은 벌점에 대해 정당하게 대응할 수 있는 수단이 부족했다. 이에 학생에게 '벌점재심청구권'을 부여하여, 자신이 받은 벌점에 대해 재고를 요청할 수 있는 공식적인 권리를 보장하고자 한다.</p>
+            <h4>예상 효과</h4><p>교사의 일방적인 지시가 아닌, 학생과의 상호 작용과 보완을 통해 벌점제를 운영함으로써 학교 민주주의 발전에 기여하는 중요한 정책이 될 것이다.</p>
+            <h4>청구 과정</h4><ol><li>벌점재심청원서 작성</li><li>공정소통부에 제출</li><li>공정소통부 1차 검토 후 접수</li><li>대의원회 심의 및 의결</li><li>선생님들 찬성 획득(교권 보호)</li><li>학생안전부 최종 결정</li></ol>
+            <p class="note">* 세부 인원 등은 추후 민주적으로 결정.</p>
+            <h4>악용 방지 부칙</h4><p>건설적 권리 행사를 위해 연 2회, 동일 항목 중복 청구 불가. 자기 성찰과 발전 목적.</p>
         </div>
-        <!-- EXECUTE POLICY_PROTOCOL_02 -->
-        <div class="policy-card">
-            <h2 class="section-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6h-2V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM8 4h8v2H8V4zm12 15H4V8h16v11zM10 15h4v-2h-4v2z"/></svg>학습 환경 개선</h2>
-            <h3>야자 3차시 폐지 및 연장 1,2차시로 개편</h3>
-            <h4>[도입 취지]</h4><p>현행 야자는 전자기기 사용 제한으로 인강 수강 등 정시 준비 및 수행평가에 어려움. 3차시 야자 집중도 저하 문제 제기.</p>
-            <h4>[개혁안]</h4><p>야자는 2차시까지 운영, 11시 점호 후 12시까지 1차시 연장, 다음날 1시까지 2차시 연장을 시행하는 방식으로 개편.</p>
+
+        <!-- 2. 학습 환경 개선 기사 -->
+        <div class="article">
+            <h2 class="article-title">학업 능률 향상 방안 제시</h2>
+            <h3>야자, 2차시 집중 운영으로 개편</h3>
+            <h4>도입 취지</h4><p>現 3차시 야자는 집중도 저하 및 인터넷 강의 수강 제한 등 문제가 제기되었다. 이에 효율적 시간 활용을 위한 개편이 시급하다.</p>
+            <h4>개혁안</h4><p>야자는 2차시까지 운영, 11시 점호 후 12시까지 1차시 연장, 다음날 1시까지 2차시 연장을 시행하는 방식으로 개편한다.</p>
+            <h4>예상 효과</h4><p>휴식을 통한 집중력 향상과 자율적 선택에 따른 책임감 있는 학습 태도 고취. 정시 성적 하락 방지를 위한 지원책 동반 마련.</p>
         </div>
-        <!-- EXECUTE POLICY_PROTOCOL_03 -->
-        <div class="policy-card">
-            <h2 class="section-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>학생 생활 문화</h2>
-            <h3>대의원회 참관인 제도 및 공정소통부 권한 확립</h3><p>학생들이 대의원회 회의를 직접 참관하고, 공정소통부의 결정에 대한 검증을 요구할 수 있는 권리를 부여하여 투명하고 민주적인 학생 자치를 실현.</p>
-            <h3>'부일 복면가왕' 등 힐링 콘텐츠 활성화</h3><p>학생들의 학업 스트레스 해소를 위해 '부일 복면가왕', 소체육대회와 같은 즐거운 행사를 적극 지원. 예선은 저녁 시간 활용, 결선은 축제 기간에 진행하여 학업 부담 최소화.</p>
+
+        <!-- 3. 학생 생활 문화 기사 -->
+        <div class="article">
+            <h2 class="article-title">소통과 활력 넘치는 학교</h2>
+            <h3>대의원회 참관인 제도 도입</h3><p>학생들이 대의원회 회의를 직접 참관하고, 공정소통부의 결정을 검증할 권리를 부여하여 투명한 학생 자치를 실현.</p>
+            <h3>'부일 복면가왕' 등 힐링 행사 활성화</h3><p>학업 스트레스 해소를 위해 '부일 복면가왕', 소체육대회 등 행사를 적극 지원. 학업 부담 최소화.</p>
+            <h3>스포츠 자율 동아리 재개설</h3><p>안전한 활동을 위해 전문 선생님 지도 하에 스포츠 자율 동아리를 재개설, 건강한 공동체 생활 도모.</p>
         </div>
-        <!-- EXECUTE POLICY_PROTOCOL_04 -->
-        <div class="policy-card">
-            <h2 class="section-title"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69-.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>학생회 운영 및 시설</h2>
-            <h3>[학생회 운영]</h3>
-            <ul><li>학생회칙/교칙 개정: 공약 실현 법적 근거 마련, 낡은 조항 현실화.</li><li>'제작홍보부' 통합: SNS 관리, 영상 제작 등 홍보 업무 효율성 증대.</li><li>'공정소통부' 출범: 학생 신문고 통합, 학생 권리 신장 핵심 부서로 재편.</li></ul>
-            <h3>[학교 환경 시설]</h3>
-            <ul><li>캐노피(비차단막) 설치 재추진.</li><li>노후 시설(문, 사물함 등) 점검 및 교체.</li><li>전면적 와이파이 개선 및 보완.</li><li>3학년 층 누수 점검 및 보수.</li></ul>
+
+        <!-- 4. 학생회 및 시설 개선 기사 -->
+        <div class="article">
+            <h2 class="article-title">학생회 혁신 및 환경 개선</h2>
+            <h3>학생회 운영</h3><ul><li><strong>학생회칙 개정:</strong> 공약 실현 근거 마련 및 낡은 조항 수정.</li><li><strong>'제작홍보부' 통합:</strong> 홍보 업무 효율성 증대.</li><li><strong>'공정소통부' 출범:</strong> 학생 신문고 통합 및 권리 신장.</li></ul>
+            <h3>학교 환경 시설</h3><ul><li><strong>캐노피 설치:</strong> 관련 공약 재확인 및 추진.</li><li><strong>노후 시설 교체:</strong> 문, 사물함 등 점검 및 교체.</li><li><strong>와이파이 전면 개선:</strong> 모든 공간에서 원활한 사용.</li><li><strong>3학년 층 누수 점검:</strong> 교실 누수 문제 점검 및 보수.</li></ul>
         </div>
     </main>
 
     <footer>
-        <p>{footerSlogan}</p>
+        <p>{footerText}</p>
     </footer>
   </div>
-
-  <script>
-    // Intersection Observer: 화면에 보이면 애니메이션 실행 (기존과 동일)
-    const cards = document.querySelectorAll('.policy-card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    cards.forEach(card => { observer.observe(card); });
-  </script>
+  <!-- 참고: 신문 컨셉에는 동적인 스크립트가 어울리지 않아 삭제했습니다. -->
 </body>
 </html>
