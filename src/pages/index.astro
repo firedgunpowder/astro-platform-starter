@@ -18,12 +18,12 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
         /* Google Fonts: 클래식한 명조체 (Gowun Batang, Nanum Myeongjo) */
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 
-        /* === 1940년대 신문 스타일 (Aged Version) === */
+        /* === 1940년대 신문 스타일 === */
         body {
             font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
             margin: 0;
             padding: 0;
-            background-color: #6d6454; /* 배경을 어두운 나무색으로 하여 종이를 돋보이게 */
+            background-color: #fdf5e6; /* 낡은 종이 색 (Seashell White) */
             color: #2c2c2c; /* 짙은 잉크 색 */
             line-height: 1.8;
             font-size: 16px;
@@ -32,13 +32,10 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
         .newspaper-container {
             max-width: 900px;
             margin: 40px auto;
-            padding: 50px;
-            
-            /* === 핵심 변경 사항 === */
-            background-color: #EAE3D4; /* 더 깊은 세피아 색으로 변경 */
-            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* 해진 종이 질감 추가 */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4), inset 0 0 40px rgba(0,0,0,0.25); /* 바깥 그림자 및 빛 바랜 테두리 효과 */
-            border: 1px solid #C8BCA8; /* 테두리를 조금 더 어둡게 */
+            padding: 40px;
+            background-color: #f9f4e8;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid #dcd3c3;
         }
 
         /* === 신문 상단 (제호, 날짜) === */
@@ -54,7 +51,6 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
             font-weight: 800;
             margin: 0;
             letter-spacing: 5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 잉크 번짐 효과 */
         }
         .masthead-sub {
             display: flex;
@@ -88,6 +84,7 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
             column-rule: 1px solid #dcd3c3;
         }
         
+        /* 컬럼이 깨지지 않게 방지 */
         @media (max-width: 768px) {
             .content-area {
                 column-count: 1;
@@ -97,8 +94,10 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
         /* === 개별 기사(공약) 스타일 === */
         .article {
             margin-bottom: 30px;
-            break-inside: avoid-column;
-            padding-top: 15px;
+            break-inside: avoid-column; /* 기사가 컬럼 중간에 잘리는 현상 방지 */
+            padding: 15px;
+            border: 1px solid #e7e0d2;
+            background: #fffef9;
         }
         
         .article-title {
@@ -184,5 +183,6 @@ const footerText = `시대의 선택, 기호 1번 정연우`;
         <p>{footerText}</p>
     </footer>
   </div>
+  <!-- 참고: 신문 컨셉에는 동적인 스크립트가 어울리지 않아 삭제했습니다. -->
 </body>
 </html>
