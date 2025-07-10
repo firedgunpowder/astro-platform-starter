@@ -1,21 +1,209 @@
 ---
+// 이 파일은 astro-platform-starter 템플릿의 기본 레이아웃을 사용합니다.
+// 이 코드는 템플릿의 <head>와 <body>를 자동으로 채워줍니다.
 import Layout from '../layouts/Layout.astro';
-import ContextAlert from '../components/ContextAlert.astro';
-import Markdown from '../components/Markdown.astro';
-
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
-
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
 ---
 
-<Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<!-- 
+  Layout 태그에 웹사이트의 제목을 전달합니다. 
+  이것이 브라우저 탭에 표시됩니다.
+-->
+<Layout title="기호 1번 정연우 학생회 공약">
+	
+  <!-- 
+    Astro 파일 안에서도 <style> 태그를 그대로 사용할 수 있습니다.
+    is:global을 추가하여 HTML 파일에서처럼 스타일이 전역으로 적용되게 합니다.
+  -->
+  <style is:global>
+    /* Google Fonts에서 Noto Sans KR 폰트 가져오기 */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+    /* === 기본 스타일 === */
+    body {
+        font-family: 'Noto Sans KR', sans-serif; /* 웹사이트 전체 글꼴 설정 */
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7f6; /* 부드러운 회색 배경 */
+        color: #333;
+        line-height: 1.7; /* 줄 간격 설정으로 가독성 향상 */
+    }
+
+    /* === 레이아웃 === */
+    .container {
+        max-width: 800px; /* 웹사이트 최대 너비 */
+        margin: 0 auto; /* 중앙 정렬 */
+        padding: 20px;
+    }
+
+    /* === 헤더 (가장 위 제목) === */
+    header {
+        text-align: center;
+        padding: 40px 20px;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 40px;
+    }
+
+    header h1 {
+        font-size: 2.5em; /* '기호 1번 정연우' 글자 크기 */
+        font-weight: 900; /* 가장 두꺼운 글씨체 */
+        color: #0056b3; /* 신뢰감을 주는 파란색 */
+        margin: 0;
+    }
+
+    header .slogan {
+        font-size: 1.2em;
+        color: #555;
+        margin-top: 10px;
+    }
+    
+    /* === 공약 카드 스타일 === */
+    .policy-card {
+        background-color: #ffffff; /* 흰색 카드 배경 */
+        border-radius: 12px; /* 부드러운 모서리 */
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 은은한 그림자 효과 */
+        transition: transform 0.2s; /* 마우스 올렸을 때 부드러운 효과 */
+    }
+
+    .policy-card:hover {
+        transform: translateY(-5px); /* 마우스 올리면 살짝 위로 이동 */
+    }
+
+    /* === 제목 스타일 (h2, h3, h4) === */
+    h2 { /* '생활 관리 규정' 등 큰 카테고리 제목 */
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #333;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+
+    h3 { /* '벌점재심청구권 부여' 등 공약 제목 */
+        font-size: 1.4em;
+        font-weight: 700;
+        color: #0056b3;
+    }
+    
+    h4 { /* '도입 취지', '청구 과정' 등 작은 제목 */
+        font-size: 1.1em;
+        font-weight: 700;
+        color: #333;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+    
+    /* === 목록 스타일 (ul, ol) === */
+    ul, ol {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    /* === 기타 스타일 === */
+    .note { /* '*'로 시작하는 작은 설명글 스타일 */
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 15px;
+    }
+
+    /* === 푸터 (가장 아래) === */
+    footer {
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 40px;
+        border-top: 2px solid #ddd;
+        font-size: 1.2em;
+        font-weight: 700;
+        color: #0056b3;
+    }
+  </style>
+
+  <!-- 
+    여기부터는 웹사이트에 표시될 실제 내용입니다.
+    기존 HTML 파일의 <body> 안에 있던 내용과 동일합니다.
+  -->
+  <div class="container">
+    <header>
+        <h1>기호 1번 정연우</h1>
+        <p class="slogan">학생이 중심이 되는 학교, 여러분과 함께 만들겠습니다.</p>
+    </header>
+
+    <main>
+        <!-- 1. 생활 관리 규정 섹션 -->
+        <div class="policy-card">
+            <h2>생활 관리 규정</h2>
+            <h3>벌점재심청구권 부여</h3>
+            <h4>도입 취지</h4>
+            <p>기존 상벌점 제도에서 학생이 받은 벌점에 대해 정당하게 대응할 수 있는 수단이 부족했습니다. 이에 학생에게 '벌점재심청구권'을 부여하여, 자신이 받은 벌점에 대해 재고를 요청할 수 있는 공식적인 권리를 보장하고자 합니다.</p>
+            <h4>예상 효과</h4>
+            <p>교사의 일방적인 지시가 아닌, 학생과의 상호 작용과 보완을 통해 벌점제를 운영함으로써 학교 민주주의 발전에 기여하는 중요한 정책이 될 것입니다.</p>
+            <h4>청구 과정</h4>
+            <ol>
+                <li>벌점재심청원서를 작성합니다.</li>
+                <li>공정소통부에 이를 제출합니다.</li>
+                <li>공정소통부는 1차 검토 후 서류에 문제가 없을 시 접수합니다.</li>
+                <li>대의원회에서 이를 심의하고 의결하여 재적 의원의 일정 수 이상 찬성을 받아야 합니다.</li>
+                <li>이후 일정 기간 동안 선생님들로부터 일정 수 이상의 찬성을 받습니다 (교권 보호를 위해 익명성 보장).</li>
+                <li>학생안전부로 이양하여 최종 결정합니다.</li>
+            </ol>
+            <p class="note">
+                * '일정 수' 관련 항목은 추후 대의원회와 선생님들의 의견을 수렴하여 민주적으로 구체화할 예정입니다.
+            </p>
+            <h4>악용 방지 부칙</h4>
+            <p>건설적인 권리 행사를 위해 한 학생당 1년에 2번만 청구 가능하며, 동일한 항목으로는 중복 청구가 불가능합니다. 이는 벌점 항목에 대한 자기 성찰과 인식 발전을 목적으로 하기 때문입니다.</p>
+        </div>
+
+        <!-- 2. 학습 환경 개선 섹션 -->
+        <div class="policy-card">
+            <h2>학습 환경 개선</h2>
+            <h3>야자 3차시 폐지 및 연장 1,2차시로 개편</h3>
+            <h4>도입 취지</h4>
+            <p>현재 야자는 3차시와 연장 1차시로 운영되나, 전자기기 사용이 제한적이라 인터넷 강의 수강 등 정시 준비와 수행평가에 어려움이 있다는 의견이 많습니다. 또한, 3차시 야자의 집중도가 떨어진다는 문제도 제기되었습니다.</p>
+            <h4>개혁안</h4>
+            <p>야자는 2차시까지 운영하고, 11시 점호 후 12시까지 1차시 연장, 다음날 1시까지 2차시 연장을 시행하는 방식으로 개편하겠습니다.</p>
+            <h4>예상 효과</h4>
+            <p>중간 휴식을 통해 집중력을 높이고, 자율적 선택에 따른 연장 학습으로 책임감 있는 학습 태도를 기를 수 있습니다. 단, 연장 학습에 대한 체계적인 교육과 지원이 동반되어야 정시 성적 하락을 막을 수 있으므로, 이에 대한 대응책을 마련하겠습니다.</p>
+        </div>
+
+        <!-- 3. 학생 생활 문화 섹션 -->
+        <div class="policy-card">
+            <h2>학생 생활 문화</h2>
+            <h3>대의원회 참관인 제도 및 공정소통부 권한 확립</h3>
+            <p>학생들이 대의원회 회의를 직접 참관하고, 공정소통부의 결정에 대한 검증을 요구할 수 있는 권리를 부여하여 투명하고 민주적인 학생 자치를 실현하겠습니다.</p>
+            
+            <h3>'부일 복면가왕' 등 힐링 콘텐츠 활성화</h3>
+            <p>학생들의 학업 스트레스 해소를 위해 '부일 복면가왕', 소체육대회와 같은 즐거운 행사를 적극 지원하겠습니다. 예선은 저녁 시간을 활용하고, 결선은 축제 기간에 진행하여 학업 부담을 최소화하겠습니다.</p>
+
+            <h3>스포츠 관련 자율 동아리 재개설</h3>
+            <p>운동은 학업 스트레스 해소와 건강한 공동체 생활에 필수적입니다. 안전한 활동을 위해 전문 선생님의 지도 하에 스포츠 자율 동아리를 다시 개설하여 운영하겠습니다.</p>
+        </div>
+
+        <!-- 4. 학생회 운영 및 학교 환경 시설 섹션 -->
+        <div class="policy-card">
+            <h2>학생회 운영 및 학교 환경 시설</h2>
+            <h3>학생회 운영</h3>
+            <ul>
+                <li><strong>학생회칙 및 교칙 개정:</strong> 공약 실현에 필요한 법적 근거를 마련하고, 낡은 조항을 현실에 맞게 수정하겠습니다.</li>
+                <li><strong>'제작홍보부'로 통합:</strong> 정보소통부와 제작홍보부를 통합하여 SNS 관리, 수능 출정식 영상 제작 등 홍보 업무의 효율성을 높이겠습니다.</li>
+                <li><strong>'공정소통부' 출범:</strong> 학생 신문고(급식, 건의사항 등)를 통합 운영하고, 벌점재심청구권 등 학생 권리 신장을 위한 핵심 부서로 재개편하겠습니다.</li>
+            </ul>
+
+            <h3>학교 환경 시설</h3>
+            <ul>
+                <li><strong>캐노피(비차단막) 설치:</strong> 관련 공약을 재확인하고 추진하겠습니다.</li>
+                <li><strong>노후 시설 교체:</strong> 문, 사물함 등 낡은 시설을 점검하고 교체하겠습니다.</li>
+                <li><strong>전면적인 와이파이 개선:</strong> 학교 모든 공간에서 원활한 와이파이 사용이 가능하도록 개선하고 보완하겠습니다.</li>
+                <li><strong>3학년 층 누수 점검:</strong> 3학년 교실의 누수 문제를 점검하고 보수하겠습니다.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>확실한 회장, 확실히 정연우</p>
+    </footer>
+  </div>
 </Layout>
