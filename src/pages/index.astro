@@ -18,9 +18,14 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
           font-family: 'Noto Sans KR', sans-serif;
           margin: 0;
           padding: 0;
-          background-color: #f4f7f6;
           color: #333;
           line-height: 1.7;
+          
+          /* === 스크롤 그라데이션 배경 (핵심 변경) === */
+          /* 위쪽은 밝은 회색(#f4f7f6)에서 아래쪽은 조금 더 어두운 회색(#dde2e8)으로 변하는 그라데이션 */
+          background: linear-gradient(to bottom, #f4f7f6, #dde2e8);
+          /* 스크롤을 내려도 배경은 고정시켜서 색이 변하는 것처럼 보이게 함 */
+          background-attachment: fixed;
       }
   
       /* === 레이아웃 === */
@@ -36,20 +41,13 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
           padding: 40px 20px;
           border-bottom: 2px solid #ddd;
           margin-bottom: 40px;
+          /* 배경이 어두워져도 헤더 부분은 잘 보이도록 흰색 배경 추가 */
+          background-color: rgba(255, 255, 255, 0.7);
+          border-radius: 0 0 15px 15px;
       }
   
-      header h1 {
-          font-size: 2.5em;
-          font-weight: 900;
-          color: #0056b3;
-          margin: 0;
-      }
-  
-      header .slogan {
-          font-size: 1.2em;
-          color: #555;
-          margin-top: 10px;
-      }
+      header h1 { font-size: 2.5em; font-weight: 900; color: #0056b3; margin: 0; }
+      header .slogan { font-size: 1.2em; color: #555; margin-top: 10px; }
       
       /* === 공약 카드 스타일 (스크롤 효과 추가) === */
       .policy-card {
@@ -58,21 +56,18 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
           padding: 30px;
           margin-bottom: 30px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-          
-          /* 스크롤 애니메이션을 위한 초기 상태 설정 */
           opacity: 0;
           transform: translateY(20px);
-          transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+          transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s;
       }
       
-      /* 스크롤 되어 화면에 보일 때 적용될 스타일 */
       .policy-card.is-visible {
           opacity: 1;
           transform: translateY(0);
       }
-
       .policy-card:hover {
           transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
       }
   
       /* 제목 스타일 */
@@ -80,11 +75,9 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
       h3 { font-size: 1.4em; font-weight: 700; color: #0056b3; }
       h4 { font-size: 1.1em; font-weight: 700; color: #333; margin-top: 25px; margin-bottom: 10px; }
       
-      /* 목록 스타일 */
+      /* 목록 및 기타 스타일 */
       ul, ol { padding-left: 20px; }
       li { margin-bottom: 8px; }
-
-      /* 기타 스타일 */
       .note { font-size: 0.9em; color: #666; margin-top: 15px; }
 
       /* 푸터 */
@@ -110,6 +103,7 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
               <h4>악용 방지 부칙</h4><p>건설적인 권리 행사를 위해 한 학생당 1년에 2번만 청구 가능하며, 동일한 항목으로는 중복 청구가 불가능합니다. 이는 벌점 항목에 대한 자기 성찰과 인식 발전을 목적으로 하기 때문입니다.</p>
           </div>
   
+          <!-- 나머지 공약 카드들은 생략... 내용은 이전과 동일합니다 -->
           <!-- 2. 학습 환경 개선 섹션 -->
           <div class="policy-card">
               <h2>학습 환경 개선</h2>
@@ -145,20 +139,14 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
       const cards = document.querySelectorAll('.policy-card');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          // 화면에 카드가 나타나면
           if (entry.isIntersecting) {
-            // 'is-visible' 클래스를 추가하여 애니메이션을 발동시킵니다.
             entry.target.classList.add('is-visible');
-            // 한 번 나타난 카드는 다시 관찰하지 않아도 되므로 관찰을 중지합니다.
             observer.unobserve(entry.target);
           }
         });
       }, {
-        // 카드가 10% 정도 보였을 때 애니메이션을 시작합니다.
         threshold: 0.1,
       });
-
-      // 각 카드에 대해 관찰을 시작합니다.
       cards.forEach(card => {
         observer.observe(card);
       });
