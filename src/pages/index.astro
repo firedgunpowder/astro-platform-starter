@@ -30,43 +30,35 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
       .policy-card.is-visible { opacity: 1; transform: translateY(0); }
       .policy-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
       
-      h2, h3, h4, ul, ol, .note { /* 이전과 동일 */ }
       h2 { font-size: 1.8em; font-weight: 700; color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
       h3 { font-size: 1.4em; font-weight: 700; color: #0056b3; }
       h4 { font-size: 1.1em; font-weight: 700; color: #333; margin-top: 25px; margin-bottom: 10px; }
+      
       ul, ol { padding-left: 20px; }
       li { margin-bottom: 8px; }
       .note { font-size: 0.9em; color: #666; margin-top: 15px; }
       
       footer { text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 2px solid #ddd; }
       
-      /* === 무지개 & 파도 애니메이션 스타일 === */
-      @keyframes rainbow-shine { to { background-position: 200% center; } }
-      @keyframes wave-effect {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+      /* === 핵심: 무지개 애니메이션을 위한 스타일 === */
+      @keyframes rainbow-shine {
+        to { background-position: 200% center; }
       }
-
       .rainbow-footer-text {
         font-size: 1.2em;
         font-weight: 900;
+        /* 무지개 그라데이션 배경 생성 */
         background-image: linear-gradient( to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000 );
         background-size: 200% auto;
+        /* 텍스트를 마스크로 사용 */
         color: #000;
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .rainbow-footer-text.is-shining { animation: rainbow-shine 2s linear infinite; }
-      
-      /* 파도 효과를 위한 개별 글자(span) 스타일 */
-      .rainbow-footer-text span {
-        display: inline-block; /* transform을 적용하기 위해 필수 */
-        position: relative; /* 파도 효과를 위해 추가 */
-      }
-      .rainbow-footer-text.is-waving span {
-        /* is-waving 클래스가 붙으면 애니메이션 시작 */
-        animation: wave-effect 1.5s infinite;
+      .rainbow-footer-text.is-shining {
+        /* is-shining 클래스가 붙으면 애니메이션 시작 */
+        animation: rainbow-shine 0.5s linear infinite;
       }
 
     </style>
@@ -134,43 +126,23 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
       }, { threshold: 0.1 });
       cards.forEach(card => cardObserver.observe(card));
 
-      // 2. 푸터 애니메이션 (무지개 + 파도)
+      // === 여기입니다! 푸터 애니메이션을 위한 JavaScript 코드 ===
+      // 2. 푸터 무지개 애니메이션
       const footer = document.getElementById('page-footer');
       const footerObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+          // 푸터가 화면에 보이면
           if (entry.isIntersecting) {
             const footerText = footer.querySelector('.rainbow-footer-text');
-            
-            // 무지개 효과 시작
+            // 'is-shining' 클래스를 추가해서 애니메이션을 시작!
             footerText.classList.add('is-shining');
-
-            // === 여기입니다! 파도 효과를 위한 자바스크립트 ===
-            // 한 번만 실행되도록 체크
-            if (!footerText.classList.contains('is-waving')) {
-              footerText.classList.add('is-waving');
-              const text = footerText.innerText;
-              footerText.innerHTML = ''; // 기존 텍스트 비우기
-              
-              text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                // 공백은 파도 효과에서 제외
-                if (char === ' ') {
-                  span.innerHTML = ' ';
-                } else {
-                  span.innerText = char;
-                }
-                // 각 글자에 시간차(delay)를 줌
-                span.style.animationDelay = `${index * 0.07}s`;
-                footerText.appendChild(span);
-              });
-            }
-            
-            // 애니메이션이 시작되면 더 이상 관찰할 필요 없음
+            // 한 번 실행되면 더 이상 관찰할 필요 없음
             footerObserver.unobserve(footer);
           }
         });
-      }, { threshold: 0.5 });
+      }, { threshold: 0.1 }); // 푸터가 90% 정도 보이면 실행
       
+      // 푸터 관찰 시작
       footerObserver.observe(footer);
     </script>
 </body>
