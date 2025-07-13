@@ -58,7 +58,7 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
       }
       .rainbow-footer-text.is-shining {
         /* is-shining 클래스가 붙으면 애니메이션 시작 */
-        animation: rainbow-shine 2s linear infinite;
+        animation: rainbow-shine 1s linear infinite;
       }
 
     </style>
@@ -140,7 +140,7 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
             footerObserver.unobserve(footer);
           }
         });
-      }, { threshold: 0.1 }); // 푸터가 50% 정도 보이면 실행
+      }, { threshold: 0.1 }); // 푸터가 90% 정도 보이면 실행
       
       // 푸터 관찰 시작
       footerObserver.observe(footer);
