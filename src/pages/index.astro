@@ -1,6 +1,9 @@
 ---
-// 웹사이트의 제목 등 정보를 관리하는 영역입니다.
-const pageTitle = "기호 1번 정연우 학생회 공약";
+// '기념비적인' 컨셉 데이터
+const candidateName = "정연우";
+const mainSlogan = "강력한 학생회, 질서 있는 학교";
+const pageTitle = `기호 1번 ${candidateName} | ${mainSlogan}`;
+const footerSlogan = "하나의 목소리로, 하나의 목표를 향하여";
 ---
 
 <!DOCTYPE html>
@@ -10,64 +13,116 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{pageTitle}</title>
     <style is:global>
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-      
-      body {
-          font-family: 'Noto Sans KR', sans-serif;
-          margin: 0;
-          padding: 0;
-          color: #333;
-          line-height: 1.7;
-          background: linear-gradient(to bottom, #f4f7f6, #dde2e8);
-          background-attachment: fixed;
-      }
-      .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-      header { text-align: center; padding: 40px 20px; border-bottom: 2px solid #ddd; margin-bottom: 40px; background-color: rgba(255, 255, 255, 0.7); border-radius: 0 0 15px 15px; }
-      header h1 { font-size: 2.5em; font-weight: 900; color: #0056b3; margin: 0; }
-      header .slogan { font-size: 1.2em; color: #555; margin-top: 10px; }
-      
-      .policy-card { background-color: #ffffff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s; }
-      .policy-card.is-visible { opacity: 1; transform: translateY(0); }
-      .policy-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
-      
-      h2 { font-size: 1.8em; font-weight: 700; color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-      h3 { font-size: 1.4em; font-weight: 700; color: #0056b3; }
-      h4 { font-size: 1.1em; font-weight: 700; color: #333; margin-top: 25px; margin-bottom: 10px; }
-      
-      ul, ol { padding-left: 20px; }
-      li { margin-bottom: 8px; }
-      .note { font-size: 0.9em; color: #666; margin-top: 15px; }
-      
-      footer { text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 2px solid #ddd; }
-      
-      /* === 핵심: 무지개 애니메이션을 위한 스타일 === */
-      @keyframes rainbow-shine {
-        to { background-position: 200% center; }
-      }
-      .rainbow-footer-text {
-        font-size: 1.2em;
-        font-weight: 900;
-        /* 무지개 그라데이션 배경 생성 */
-        background-image: linear-gradient( to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000 );
-        background-size: 200% auto;
-        /* 텍스트를 마스크로 사용 */
-        color: #000;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .rainbow-footer-text.is-shining {
-        /* is-shining 클래스가 붙으면 애니메이션 시작 */
-        animation: rainbow-shine 2s linear infinite;
-      }
+        /* Google Fonts: 강렬한 헤드라인용 Anton과 가독성용 Noto Sans KR */
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@400;700&display=swap');
 
+        /* === 기념비적인 (Monumental) 스타일 === */
+        :root {
+            --bg-color: #1a1a1a;         /* 짙은 차콜 그레이 */
+            --card-bg-color: #2b2b2b;    /* 카드 배경색 */
+            --text-color: #e8e8e8;       /* 기본 텍스트 색상 (크림색) */
+            --accent-color: #800020;     /* 검붉은색 (Burgundy) */
+            --border-color: #444;       /* 테두리 색상 */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+  
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+  
+        /* === 강렬한 헤더 === */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 50px;
+            border-bottom: 4px double var(--border-color);
+        }
+  
+        header h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            font-weight: 400;
+            color: var(--text-color);
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase; /* 모든 글자를 대문자로 */
+        }
+        header .slogan {
+            font-size: 1.5em;
+            color: var(--text-color);
+            margin-top: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+      
+        /* === 각지고 단호한 공약 카드 === */
+        .policy-card {
+            background-color: var(--card-bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 0; /* 각진 모서리 */
+            padding: 30px;
+            margin-bottom: 40px;
+            
+            /* 절제된 애니메이션 */
+            opacity: 0;
+            transition: opacity 0.7s ease-in-out, border-color 0.3s ease;
+        }
+      
+        .policy-card.is-visible {
+            opacity: 1;
+        }
+
+        .policy-card:hover {
+            border-color: var(--accent-color); /* 마우스를 올리면 테두리 색 변경 */
+        }
+  
+        /* 제목 스타일 */
+        h2 { 
+            font-family: 'Anton', sans-serif;
+            font-size: 2.2em;
+            font-weight: 400;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+        h3 { font-size: 1.4em; font-weight: 700; color: var(--accent-color); }
+        h4 { font-size: 1.1em; font-weight: 700; color: #ccc; margin-top: 25px; margin-bottom: 10px; }
+      
+        /* 목록 및 기타 스타일 */
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .note { font-size: 0.9em; color: #999; margin-top: 15px; font-style: italic; }
+
+        /* 푸터 */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 2px solid var(--border-color);
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
     </style>
 </head>
 <body>
     <div class="container">
       <header>
-          <h1>기호 1번 정연우</h1>
-          <p class="slogan">학생이 중심이 되는 학교, 여러분과 함께 만들겠습니다.</p>
+          <h1>기호 1번 {candidateName}</h1>
+          <p class="slogan">{mainSlogan}</p>
       </header>
   
       <main>
@@ -90,7 +145,7 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
               <h4>개혁안</h4><p>야자는 2차시까지 운영하고, 11시 점호 후 12시까지 1차시 연장, 다음날 1시까지 2차시 연장을 시행하는 방식으로 개편하겠습니다.</p>
               <h4>예상 효과</h4><p>중간 휴식을 통해 집중력을 높이고, 자율적 선택에 따른 연장 학습으로 책임감 있는 학습 태도를 기를 수 있습니다. 단, 연장 학습에 대한 체계적인 교육과 지원이 동반되어야 전반적인 성적 하락을 막을 수 있으므로, 이에 대한 대응책을 마련하겠습니다.</p>
           </div>
-
+  
           <!-- 3. 학생회 운영 및 학교 환경 시설 섹션 -->
           <div class="policy-card">
               <h2>학생회 운영 및 학교 환경 시설</h2>
@@ -104,46 +159,31 @@ const pageTitle = "기호 1번 정연우 학생회 공약";
               <h2>학생 생활 문화</h2>
               <h3>대의원회 참관인 제도 및 공정소통부 권한 확립</h3><p>학생들이 대의원회 회의를 직접 참관하고, 공정소통부이 학교의 결정에 대한 검증을 요구할 수 있는 권리를 부여하여 투명하고 민주적인 학생 자치를 실현하겠습니다.</p>
               <h3>'부일 복면가왕' 등 힐링 콘텐츠 활성화</h3><p>학생들의 학업 스트레스 해소를 위해 '부일 복면가왕'과 같은 즐거운 행사를 적극 지원하겠습니다. 예선은 저녁 시간을 활용하고, 결선은 축제 기간에 진행하여 학업 부담을 최소화하겠습니다.</p>
+              <h3>스포츠 관련 자율 동아리 재개설</h3><p>운동은 학업 스트레스 해소와 건강한 공동체 생활에 필수적입니다. 안전한 활동을 위해 전문 선생님의 지도 하에 스포츠 자율 동아리를 다시 개설하여 운영하겠습니다.</p>
           </div>
       </main>
   
-      <footer id="page-footer">
-          <p class="rainbow-footer-text">부일, 확실하게 쇄신시키겠습니다. 확실함 회장, 확실히 기호 1번 정연우</p>
+      <footer>
+          <p>{footerSlogan}</p>
       </footer>
     </div>
 
     <!-- 스크롤 애니메이션을 위한 JavaScript 코드 -->
     <script>
-      // 1. 공약 카드 애니메이션
       const cards = document.querySelectorAll('.policy-card');
-      const cardObserver = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            cardObserver.unobserve(entry.target);
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
-      cards.forEach(card => cardObserver.observe(card));
-
-      // === 여기입니다! 푸터 애니메이션을 위한 JavaScript 코드 ===
-      // 2. 푸터 무지개 애니메이션
-      const footer = document.getElementById('page-footer');
-      const footerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          // 푸터가 화면에 보이면
-          if (entry.isIntersecting) {
-            const footerText = footer.querySelector('.rainbow-footer-text');
-            // 'is-shining' 클래스를 추가해서 애니메이션을 시작!
-            footerText.classList.add('is-shining');
-            // 한 번 실행되면 더 이상 관찰할 필요 없음
-            footerObserver.unobserve(footer);
-          }
-        });
-      }, { threshold: 0.5 }); // 푸터가 50% 정도 보이면 실행
-      
-      // 푸터 관찰 시작
-      footerObserver.observe(footer);
+      }, {
+        threshold: 0.1,
+      });
+      cards.forEach(card => {
+        observer.observe(card);
+      });
     </script>
 </body>
 </html>
